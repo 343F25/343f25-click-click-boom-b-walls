@@ -154,8 +154,11 @@
     const boomSound = document.getElementById('boom')
     let lastSound = clickSound;
 
-    // TODO: 1 - make it such that if any table cell is clicked, the onClick function below is executed
-
+    const tableCells = document.querySelectorAll("td");
+    tableCells.forEach((e) => {
+      e.addEventListener("click", onClick);
+    })
+  
     function onClick(ev) {
       lastSound.pause()
       lastSound.currentTime = 0;
@@ -168,10 +171,9 @@
         clickSound.play();
         lastSound = clickSound
       }
-
       console.log(`ev in onClick ${ev}`)
       // TODO: 2 - REMOVE THE TABLE CELL THAT WAS CLICKED
-
+      ev.target.remove();
     }
   </script>
 </body>
