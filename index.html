@@ -19,6 +19,7 @@
   </style>
 </head>
 <body>
+  <h1 id="boom-text"></h1>
   <table>
     <tbody>
       <tr>
@@ -153,6 +154,7 @@
     const clickSound = document.getElementById('click')
     const boomSound = document.getElementById('boom')
     let lastSound = clickSound;
+    const boomText = document.getElementById('boom-text');
 
     const tableCells = document.querySelectorAll("td");
     tableCells.forEach((e) => {
@@ -167,13 +169,22 @@
         // boom
         boomSound.play();
         lastSound = boomSound
+        boomText.innerHTML = "BOOM"
       } else {
         clickSound.play();
         lastSound = clickSound
+        boomText.innerHTML = "";
       }
       console.log(`ev in onClick ${ev}`)
       // TODO: 2 - REMOVE THE TABLE CELL THAT WAS CLICKED
+      const row = ev.target.parentElement;
       ev.target.remove();
+      console.log(row);
+      if (row.children.length % 2 === 0) {
+        row.removeAttribute("class");
+      } else {
+        row.className = "odd";
+      }
     }
   </script>
 </body>
